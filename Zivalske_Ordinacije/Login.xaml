@@ -7,7 +7,19 @@
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="321,130,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Grid Name="GridLogin" Visibility="Hidden">
 
+            <TextBox x:Name="username" HorizontalAlignment="Left" Margin="321,130,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="password" HorizontalAlignment="Left" Margin="321,169,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="Login1" Content="Button" HorizontalAlignment="Left" Margin="360,217,0,0" VerticalAlignment="Top" Click="Login1_Click"/>
+            <Label x:Name="label1" Content="Nimate accounta?" HorizontalAlignment="Left" Margin="441,227,0,0" VerticalAlignment="Top" MouseDown="label1_MouseDown"/>
+
+        </Grid>
+        <Grid Name="GridRegistracija" Visibility="Visible">
+            <TextBox x:Name="r_username" HorizontalAlignment="Left" Margin="329,130,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="r_password" HorizontalAlignment="Left" Margin="329,165,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="Registracija" Content="Button" HorizontalAlignment="Left" Margin="369,217,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.086,-1.158" Click="Registracija_Click"/>
+
+        </Grid>
     </Grid>
 </Window>
