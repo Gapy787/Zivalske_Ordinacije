@@ -74,5 +74,38 @@ namespace Zivalske_Ordinacije
             }
             con.Close();
         }
+
+        private void r_username_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (r_username.Text == "Enter username")
+            {
+                r_username.Text = "";
+            }
+        }
+
+        private void r_username_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(r_username.Text))
+            {
+                r_username.Text = "Enter username";
+            }
+
+        }
+
+        private void r_password_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (r_password.Text == "Enter password")
+            {
+                r_password.Text = "";
+            }
+        }
+
+        private void r_password_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(r_password.Text))
+            {
+                r_password.Text = "Enter password";
+            }
+        }
     }
 }
