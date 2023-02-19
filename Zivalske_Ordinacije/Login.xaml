@@ -14,35 +14,25 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Grid Name="GridLogin" Visibility="Hidden">
+        <Grid Name="GridLogin" Visibility="Visible">
 
-            <TextBox x:Name="username" HorizontalAlignment="Left" Margin="321,130,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
-            <TextBox x:Name="password" HorizontalAlignment="Left" Margin="321,169,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-            <Button x:Name="Login1" Content="Button" HorizontalAlignment="Left" Margin="360,217,0,0" VerticalAlignment="Top" Click="Login1_Click"/>
-            <Label x:Name="label1" Content="Nimate accounta?" HorizontalAlignment="Left" Margin="441,227,0,0" VerticalAlignment="Top" MouseDown="label1_MouseDown"/>
-
-        </Grid>
-        <Grid Name="GridRegistracija" Visibility="Visible">
-            <TextBox x:Name="r_username" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
-                     Margin="280,170,0,0" TextWrapping="Wrap" Text="Enter username" FontSize="20"
-                     Background="Transparent" VerticalAlignment="Top" Width="236" GotFocus="r_username_GotFocus" LostFocus="r_username_LostFocus" Height="29"/>
-            <TextBox x:Name="r_password"  FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left" Margin="281,230,0,0" TextWrapping="Wrap"
-                     Text="Enter password" FontSize="20" Background="Transparent" VerticalAlignment="Top"
-                     Width="235" GotFocus="r_password_GotFocus" LostFocus="r_password_LostFocus" Height="29"/>
-            <Button x:Name="Registracija"  Content="Register" Foreground="White" FontFamily="Calibri" FontSize="24" HorizontalAlignment="Center" Margin="0,288,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.086,-1.158" Click="Registracija_Click"
+            <TextBox x:Name="l_username" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
+                     Margin="280,166,0,0" TextWrapping="Wrap"  FontSize="20"
+                     Background="Transparent" VerticalAlignment="Top" Width="236" Height="29"/>
+            <PasswordBox x:Name="l_password" PasswordChar="*" FontWeight="Medium" FontFamily="Calibri" 
+                         Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left" 
+                         Margin="280,229,0,0" VerticalAlignment="Top"  FontSize="20"
+                     Background="Transparent" Width="236"  Height="29"/>
+            <Button x:Name="Login1" Content="Register" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158" Click="Login1_Click"
                     Height="40" Width="130">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border  x:Name="border" CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Foreground" Value="Gray" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
- 
                 </Button.Template>
                 <Button.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -52,13 +42,56 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Label x:Name="label_title" Content="Registration" HorizontalAlignment="Center" Margin="0,64,0,0" VerticalAlignment="Top" 
+                    
+                    
+            <Label x:Name="label1" Content="Nimate accounta?" HorizontalAlignment="Left" Margin="454,263,0,0" VerticalAlignment="Top" MouseDown="label1_MouseDown"/>
+            <Label Content="Login" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" 
                    FontSize="40" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="BlueViolet"/>
-            <Label Content="Username" HorizontalAlignment="Left" Margin="281,144,0,0" VerticalAlignment="Top"
+            <Label Content="Username" HorizontalAlignment="Left" Margin="281,140,0,0" VerticalAlignment="Top"
                    Foreground="BlueViolet" FontSize="14"/>
-            <Label Content="Password" HorizontalAlignment="Left" Margin="280,204,0,0" VerticalAlignment="Top" 
+            <Label Content="Password" HorizontalAlignment="Left" Margin="280,200,0,0" VerticalAlignment="Top" 
                    RenderTransformOrigin="-0.261,1.079" Foreground="BlueViolet" FontSize="14"/>
 
         </Grid>
+        <Grid Name="GridRegistracija" Visibility="Hidden" RenderTransformOrigin="0.783,0.496" Height="434" VerticalAlignment="Top">
+            <TextBox x:Name="r_username" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
+                     Margin="280,166,0,0" TextWrapping="Wrap"  FontSize="20"
+                     Background="Transparent" VerticalAlignment="Top" Width="236" Height="29"/>
+            <Button x:Name="Registracija"  Content="Register" Foreground="White" FontFamily="Calibri" FontSize="24" HorizontalAlignment="Center" Margin="0,353,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.086,-1.158" Click="Registracija_Click"
+                    Height="40" Width="130">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Label x:Name="label_title" Content="Registration" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" 
+                   FontSize="40" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="BlueViolet"/>
+            <Label Content="Username" HorizontalAlignment="Left" Margin="281,140,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontSize="14"/>
+            <Label Content="Password" HorizontalAlignment="Left" Margin="280,200,0,0" VerticalAlignment="Top" 
+                   RenderTransformOrigin="-0.261,1.079" Foreground="BlueViolet" FontSize="14"/>
+            <PasswordBox x:Name="r_password" PasswordChar="*" FontWeight="Medium" FontFamily="Calibri" 
+                         Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left" 
+                         Margin="280,229,0,0" VerticalAlignment="Top"  FontSize="20"
+                     Background="Transparent" Width="236"  Height="29"/>
+            <PasswordBox x:Name="r_confirmpassword" PasswordChar="*" FontWeight="Medium" FontFamily="Calibri" 
+                         Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left" 
+                         Margin="280,286,0,0" VerticalAlignment="Top"  FontSize="20"
+                     Background="Transparent" Width="236"  Height="29"/>
+            <Label Content="Confirm password" HorizontalAlignment="Left" Margin="278,261,0,0" VerticalAlignment="Top" 
+                   RenderTransformOrigin="-0.261,1.079" Foreground="BlueViolet" FontSize="14"/>
+            <CheckBox x:Name="ShowPassword" Content="Show password" Foreground="BlueViolet" FontSize="12" HorizontalAlignment="Left" Margin="281,320,0,0" VerticalAlignment="Top" Height="16" Width="120" Checked="ShowPassword_Checked" Unchecked="ShowPassword_Unchecked"/>
+        </Grid>
+
     </Grid>
 </Window>

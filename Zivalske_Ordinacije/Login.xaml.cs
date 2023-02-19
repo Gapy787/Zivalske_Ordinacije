@@ -33,7 +33,7 @@ namespace Zivalske_Ordinacije
         {
             con.Open();
 
-            string statement = "SELECT Login('" + username.Text + "' , '" + password.Text + "')";
+            string statement = "SELECT Login('" + l_username.Text + "' , '" + l_password.Password.ToString() + "')";
 
             NpgsqlCommand cmd = new NpgsqlCommand(statement,con);
             string preveri_log = cmd.ExecuteScalar().ToString();
@@ -44,7 +44,12 @@ namespace Zivalske_Ordinacije
             else
             {
                 MessageBox.Show("Uspešen Login");
+                this.Close();
+                MainWindow newWindow = new MainWindow();
+                newWindow.Show();
             }
+
+
             con.Close();
         }
 
@@ -52,60 +57,68 @@ namespace Zivalske_Ordinacije
         {
             GridLogin.Visibility= Visibility.Hidden;
             GridRegistracija.Visibility= Visibility.Visible;
+            r_username.Text = "";
+            r_password.Password = "";
+            r_confirmpassword.Password = "";
         }
 
         private void Registracija_Click(object sender, RoutedEventArgs e)
         {
             con.Open();
 
-            string statement = "SELECT Register('" + r_username.Text + "' , '" + r_password.Text + "')";
+            string statement = "SELECT Register('" + r_username.Text + "' , '" + r_password.Password.ToString() + "')";
 
             NpgsqlCommand cmd = new NpgsqlCommand(statement, con);
             string preveri_reg = cmd.ExecuteScalar().ToString();
-            if (preveri_reg.Equals("False"))
+
+            string state = "SELECT UsernameExists('" + r_username.Text + "')";
+            NpgsqlCommand cmmd = new NpgsqlCommand(state, con);
+            string preveri_username = cmmd.ExecuteScalar().ToString();
+            if (r_confirmpassword.Password == r_password.Password)
             {
-                MessageBox.Show("Neuspešna registracija poskusite znova");
+                if (preveri_username.Equals("False"))
+                {
+                    if (preveri_reg.Equals("True"))
+                    {
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Uspešna Registracija");
+                        GridRegistracija.Visibility = Visibility.Hidden;
+                        GridLogin.Visibility = Visibility.Visible;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Username already exists");
+                    r_username.Text = "";
+                    r_password.Password = "";
+                    r_confirmpassword.Password = "";
+                }
             }
             else
             {
-                MessageBox.Show("Uspešen Registracija");
-                GridRegistracija.Visibility= Visibility.Hidden;
-                GridLogin.Visibility= Visibility.Visible;
+                MessageBox.Show("Passwords don't match.");
+               
+                r_password.Password = "";
+                r_confirmpassword.Password = "";
             }
+
             con.Close();
-        }
-
-        private void r_username_GotFocus(object sender, RoutedEventArgs e)
-        {
-            if (r_username.Text == "Enter username")
-            {
-                r_username.Text = "";
-            }
-        }
-
-        private void r_username_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(r_username.Text))
-            {
-                r_username.Text = "Enter username";
-            }
 
         }
 
-        private void r_password_GotFocus(object sender, RoutedEventArgs e)
+        private void ShowPassword_Checked(object sender, RoutedEventArgs e)
         {
-            if (r_password.Text == "Enter password")
-            {
-                r_password.Text = "";
-            }
+            r_password.PasswordChar = '\0';
+            r_confirmpassword.PasswordChar = '\0';
         }
 
-        private void r_password_LostFocus(object sender, RoutedEventArgs e)
+        private void ShowPassword_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(r_password.Text))
-            {
-                r_password.Text = "Enter password";
-            }
+            r_password.PasswordChar = '*';
+            r_confirmpassword.PasswordChar = '*';
         }
     }
 }
