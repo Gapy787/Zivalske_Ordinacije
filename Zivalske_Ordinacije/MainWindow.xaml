@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zivalske_Ordinacije"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="1000">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="Aqua"  Offset="0.1" />
@@ -14,6 +14,101 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
+        <Grid Name="MainGrid" Visibility="Hidden">
+            <Button x:Name="Ordinacije" Content="Zivalske Ordinacije Slovenije" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Center" Margin="0,120,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="300" Click="Ordinacije_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="Veterinarji" Content="Veterinarji Ordinacij" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="300">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="Oddelki" Content="Oddelki ordinacij" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="300">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </Grid>
+        <Grid Name="GridOrdinacije" Visibility="Visible">
+            <Label Content="Živalske Ordinacije" HorizontalAlignment="Left" Margin="29,42,0,0" VerticalAlignment="Top" 
+                   FontSize="30" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="BlueViolet"/>
+            <ListView ItemsSource="{Binding}" Margin="29,94,391,94">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding id_o}"/>
+                        <GridViewColumn Header="Ime" DisplayMemberBinding="{Binding ime_o}"/>
+                        <GridViewColumn Header="Naslov" DisplayMemberBinding="{Binding naslov_o}"/>
+                        <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding mail_o}"/>
+                        <GridViewColumn Header="Kraj" DisplayMemberBinding="{Binding k_ime}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <TextBox x:Name="ord_ime" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
+                     Margin="703,150,0,0" TextWrapping="Wrap"  FontSize="20"
+                     Background="Transparent" VerticalAlignment="Top" Width="236" Height="29"/>
+            <TextBox x:Name="ord_naslov" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
+                     Margin="703,198,0,0" TextWrapping="Wrap"  FontSize="20"
+                     Background="Transparent" VerticalAlignment="Top" Width="236" Height="29"/>
+            <TextBox x:Name="ord_mail" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
+                     Margin="703,246,0,0" TextWrapping="Wrap"  FontSize="20"
+                     Background="Transparent" VerticalAlignment="Top" Width="236" Height="29"/>
+            <Label x:Name="label1" Content="Ime" HorizontalAlignment="Left" Margin="656,150,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18" />
+            <Label  Content="Naslov" HorizontalAlignment="Left" Margin="630,198,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18"/>
+            <Label  Content="Mail" HorizontalAlignment="Left" Margin="651,246,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18"/>
+            <Label  Content="Kraj" HorizontalAlignment="Left" Margin="651,294,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18"/>
+            <ComboBox x:Name="Kraji" HorizontalAlignment="Left" Margin="703,302,0,0" VerticalAlignment="Top" Width="236"/>
+
+        </Grid>
+
+
 
     </Grid>
 </Window>

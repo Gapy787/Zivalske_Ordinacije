@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zivalske_Ordinacije"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Height="470" Width="800">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="Aqua"  Offset="0.1" />
@@ -22,7 +22,7 @@
             <PasswordBox x:Name="l_password" PasswordChar="*" FontWeight="Medium" FontFamily="Calibri" 
                          Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left" 
                          Margin="280,229,0,0" VerticalAlignment="Top"  FontSize="20"
-                     Background="Transparent" Width="236"  Height="29"/>
+                     Background="Transparent" Width="236"  Height="29" PreviewTextInput="l_password_PreviewTextInput" PasswordChanged="l_password_PasswordChanged"/>
             <Button x:Name="Login1" Content="Login" Foreground="White" FontFamily="Calibri"
                     FontSize="24" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top"
                     RenderTransformOrigin="1.086,-1.158" Click="Login1_Click"
@@ -86,11 +86,11 @@
             <PasswordBox x:Name="r_password" PasswordChar="*" FontWeight="Medium" FontFamily="Calibri" 
                          Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left" 
                          Margin="280,229,0,0" VerticalAlignment="Top"  FontSize="20"
-                     Background="Transparent" Width="236"  Height="29"/>
+                     Background="Transparent" Width="236"  Height="29" PreviewTextInput="r_password_PreviewTextInput" PasswordChanged="r_password_PasswordChanged"/>
             <PasswordBox x:Name="r_confirmpassword" PasswordChar="*" FontWeight="Medium" FontFamily="Calibri" 
                          Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left" 
                          Margin="280,286,0,0" VerticalAlignment="Top"  FontSize="20"
-                     Background="Transparent" Width="236"  Height="29"/>
+                     Background="Transparent" Width="236"  Height="29" PreviewTextInput="r_confirmpassword_PreviewTextInput" PasswordChanged="r_confirmpassword_PasswordChanged"/>
             <Label Content="Confirm password" HorizontalAlignment="Left" Margin="278,261,0,0" VerticalAlignment="Top" 
                    RenderTransformOrigin="-0.261,1.079" Foreground="BlueViolet" FontSize="14"/>
             <CheckBox x:Name="ShowPassword" Content="Show password" Foreground="BlueViolet" FontSize="12" 
@@ -137,11 +137,11 @@
             <PasswordBox x:Name="old_password" PasswordChar="*" FontWeight="Medium" FontFamily="Calibri" 
                          Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left" 
                          Margin="280,159,0,0" VerticalAlignment="Top"  FontSize="20"
-                     Background="Transparent" Width="236"  Height="29"/>
+                     Background="Transparent" Width="236"  Height="29" PreviewTextInput="old_password_PreviewTextInput" PasswordChanged="old_password_PasswordChanged"/>
             <PasswordBox x:Name="new_password" PasswordChar="*" FontWeight="Medium" FontFamily="Calibri" 
                          Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left" 
                          Margin="280,216,0,0" VerticalAlignment="Top"  FontSize="20"
-                     Background="Transparent" Width="236"  Height="29"/>
+                     Background="Transparent" Width="236"  Height="29" PasswordChanged="new_password_PasswordChanged" PreviewTextInput="new_password_PreviewTextInput"/>
             <Button x:Name="ChangePass"  Content="Change password" Foreground="White" 
                     FontFamily="Calibri" FontSize="24" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.086,-1.158" Click="ChangePass_Click"
                     Height="40" Width="180">

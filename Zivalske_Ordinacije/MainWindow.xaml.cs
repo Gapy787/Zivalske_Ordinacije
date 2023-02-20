@@ -31,5 +31,23 @@ namespace Zivalske_Ordinacije
         {
             InitializeComponent();
         }
+
+        private void Ordinacije_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Visibility = Visibility.Hidden;
+            GridOrdinacije.Visibility = Visibility.Visible;
+            con.Open();
+
+            using (var cmd = new NpgsqlCommand("SELECT * FROM IzpisOrdinacije()", con))
+            {
+                var reader = cmd.ExecuteReader();
+                GridOrdinacije.DataContext = reader;
+            }
+
+            con.Close();
+        }
+
+        
+       
     }
 }

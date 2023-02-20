@@ -67,55 +67,62 @@ namespace Zivalske_Ordinacije
 
         private void Registracija_Click(object sender, RoutedEventArgs e)
         {
-            con.Open();
-
-            string statement = "SELECT RegisterPreveri('" + r_username.Text + "' , '" + r_password.Password.ToString() + "')";
-
-            NpgsqlCommand cmd = new NpgsqlCommand(statement, con);
-            string preveri_reg = cmd.ExecuteScalar().ToString();
-
-            string state = "SELECT UsernameExists('" + r_username.Text + "')";
-            NpgsqlCommand cmmd = new NpgsqlCommand(state, con);
-            string preveri_username = cmmd.ExecuteScalar().ToString();
-            if (r_confirmpassword.Password == r_password.Password)
+            if (r_username.Text == "" || r_password.Password == "" || r_confirmpassword.Password == "")
             {
-                if (preveri_username.Equals("False"))
+                MessageBox.Show("Can't register without information", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                con.Open();
+
+
+                string statement = "SELECT RegisterPreveri('" + r_username.Text + "' , '" + r_password.Password.ToString() + "')";
+
+                NpgsqlCommand cmd = new NpgsqlCommand(statement, con);
+                string preveri_reg = cmd.ExecuteScalar().ToString();
+
+                string state = "SELECT UsernameExists('" + r_username.Text + "')";
+                NpgsqlCommand cmmd = new NpgsqlCommand(state, con);
+                string preveri_username = cmmd.ExecuteScalar().ToString();
+                if (r_confirmpassword.Password == r_password.Password)
                 {
-                    if (preveri_reg.Equals("True"))
+                    if (preveri_username.Equals("False"))
                     {
-                        MessageBox.Show("Registration failed");
-                        r_username.Text = "";
-                        r_password.Password = null;
-                        r_confirmpassword= null;
+                        if (preveri_reg.Equals("True"))
+                        {
+                            MessageBox.Show("Registration failed");
+                            r_username.Text = "";
+                            r_password.Password = null;
+                            r_confirmpassword = null;
+                        }
+                        else
+                        {
+                            string insert = "SELECT VnesiUporabnika('" + r_username.Text + "','" + r_password.Password.ToString() + "')";
+                            NpgsqlCommand command = new NpgsqlCommand(insert, con);
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Successful registration");
+                            GridRegistracija.Visibility = Visibility.Hidden;
+                            GridLogin.Visibility = Visibility.Visible;
+                        }
                     }
                     else
                     {
-                        string insert = "SELECT VnesiUporabnika('" + r_username.Text + "','" + r_password.Password.ToString() + "')";
-                        NpgsqlCommand command = new NpgsqlCommand(insert, con);
-                        command.ExecuteNonQuery();
-                        MessageBox.Show("Successful registration");
-                        GridRegistracija.Visibility = Visibility.Hidden;
-                        GridLogin.Visibility = Visibility.Visible;
+                        MessageBox.Show("Username already exists");
+                        r_username.Text = "";
+                        r_password.Password = null;
+                        r_confirmpassword.Password = null;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Username already exists");
-                    r_username.Text = "";
+                    MessageBox.Show("Passwords don't match.");
+
                     r_password.Password = null;
                     r_confirmpassword.Password = null;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Passwords don't match.");
-               
-                r_password.Password = null;
-                r_confirmpassword.Password = null;
-            }
 
-            con.Close();
-
+                con.Close();
+            }
         }
 
         private void ShowPassword_Checked(object sender, RoutedEventArgs e)
@@ -207,6 +214,116 @@ namespace Zivalske_Ordinacije
             con.Close();
 
             
+        }
+
+        private void l_password_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string password = l_password.Password;
+
+    
+            if (password.Length >= 20)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void l_password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            string password = l_password.Password;
+
+            
+            if (password.Length > 20)
+            {
+                l_password.Password = password.Substring(0, 20);
+            }
+        }
+
+        private void r_password_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string password = r_password.Password;
+
+
+            if (password.Length >= 20)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void r_password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            string password = r_password.Password;
+
+
+            if (password.Length > 20)
+            {
+                r_password.Password = password.Substring(0, 20);
+            }
+        }
+
+        private void r_confirmpassword_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string password = r_confirmpassword.Password;
+
+
+            if (password.Length >= 20)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void r_confirmpassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            string password = r_confirmpassword.Password;
+
+
+            if (password.Length > 20)
+            {
+                r_confirmpassword.Password = password.Substring(0, 20);
+            }
+        }
+
+        private void old_password_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string password = old_password.Password;
+
+
+            if (password.Length >= 20)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void old_password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            string password = old_password.Password;
+
+
+            if (password.Length > 20)
+            {
+                old_password.Password = password.Substring(0, 20);
+            }
+        }
+
+        private void new_password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            string password = new_password.Password;
+
+
+            if (password.Length > 20)
+            {
+                new_password.Password = password.Substring(0, 20);
+            }
+        }
+
+        private void new_password_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string password = new_password.Password;
+
+
+            if (password.Length >= 20)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
