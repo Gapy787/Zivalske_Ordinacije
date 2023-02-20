@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:Zivalske_Ordinacije"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="Aqua"  Offset="0.1" />
+            <GradientStop Color="Aquamarine" Offset="0.5" />
+            <GradientStop Color="BlueViolet" Offset="3" />
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
 
     </Grid>

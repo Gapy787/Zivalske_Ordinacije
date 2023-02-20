@@ -39,14 +39,17 @@ namespace Zivalske_Ordinacije
             string preveri_log = cmd.ExecuteScalar().ToString();
             if (preveri_log.Equals("False"))
             {
-                MessageBox.Show("Neuspešen Login");
+                MessageBox.Show("Login failed");
+                l_username.Text = "";
+                l_password.Password = null;
             }
             else
             {
-                MessageBox.Show("Uspešen Login");
-                this.Close();
+                MessageBox.Show("Successful login");
+                
                 MainWindow newWindow = new MainWindow();
                 newWindow.Show();
+                this.Close();
             }
 
 
@@ -58,15 +61,15 @@ namespace Zivalske_Ordinacije
             GridLogin.Visibility= Visibility.Hidden;
             GridRegistracija.Visibility= Visibility.Visible;
             r_username.Text = "";
-            r_password.Password = "";
-            r_confirmpassword.Password = "";
+            r_password.Password = null;
+            r_confirmpassword.Password = null;
         }
 
         private void Registracija_Click(object sender, RoutedEventArgs e)
         {
             con.Open();
 
-            string statement = "SELECT Register('" + r_username.Text + "' , '" + r_password.Password.ToString() + "')";
+            string statement = "SELECT RegisterPreveri('" + r_username.Text + "' , '" + r_password.Password.ToString() + "')";
 
             NpgsqlCommand cmd = new NpgsqlCommand(statement, con);
             string preveri_reg = cmd.ExecuteScalar().ToString();
@@ -80,11 +83,17 @@ namespace Zivalske_Ordinacije
                 {
                     if (preveri_reg.Equals("True"))
                     {
-                        
+                        MessageBox.Show("Registration failed");
+                        r_username.Text = "";
+                        r_password.Password = null;
+                        r_confirmpassword= null;
                     }
                     else
                     {
-                        MessageBox.Show("Uspešna Registracija");
+                        string insert = "SELECT VnesiUporabnika('" + r_username.Text + "','" + r_password.Password.ToString() + "')";
+                        NpgsqlCommand command = new NpgsqlCommand(insert, con);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Successful registration");
                         GridRegistracija.Visibility = Visibility.Hidden;
                         GridLogin.Visibility = Visibility.Visible;
                     }
@@ -93,16 +102,16 @@ namespace Zivalske_Ordinacije
                 {
                     MessageBox.Show("Username already exists");
                     r_username.Text = "";
-                    r_password.Password = "";
-                    r_confirmpassword.Password = "";
+                    r_password.Password = null;
+                    r_confirmpassword.Password = null;
                 }
             }
             else
             {
                 MessageBox.Show("Passwords don't match.");
                
-                r_password.Password = "";
-                r_confirmpassword.Password = "";
+                r_password.Password = null;
+                r_confirmpassword.Password = null;
             }
 
             con.Close();
@@ -119,6 +128,85 @@ namespace Zivalske_Ordinacije
         {
             r_password.PasswordChar = '*';
             r_confirmpassword.PasswordChar = '*';
+        }
+
+        private void HaveAcc_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GridLogin.Visibility = Visibility.Visible;
+            GridRegistracija.Visibility = Visibility.Hidden;    
+            l_username.Text = "";
+            l_password.Password = null;
+        }
+
+        private void Label_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GridLogin.Visibility = Visibility.Hidden;
+            SpremeniPasswordGrid.Visibility = Visibility.Visible;
+        }
+
+        private void User_Click(object sender, RoutedEventArgs e)
+        {
+            con.Open();
+
+            string state = "SELECT UsernameExists('" + cp_username.Text + "')";
+            NpgsqlCommand cmmd = new NpgsqlCommand(state, con);
+            string preveri_username = cmmd.ExecuteScalar().ToString();
+
+            if (preveri_username.Equals("True"))
+            {
+                SpremeniPasswordGrid.Visibility = Visibility.Hidden;
+                ChangePasswordGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("This user doesn't exist");
+                cp_username.Text = "";
+            }
+            con.Close();
+        }
+
+
+        private void cp_username_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (cp_username.Text == "Enter your username")
+            {
+                cp_username.Text = "";
+            }
+        }
+
+        private void cp_username_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(cp_username.Text))
+            {
+                cp_username.Text = "Enter your username";
+            }
+        }
+
+        private void ChangePass_Click(object sender, RoutedEventArgs e)
+        {
+            con.Open();
+
+            string preveri = "SELECT PreveriPass('" + cp_username.Text + "','" + old_password.Password.ToString() + "')";
+            NpgsqlCommand command = new NpgsqlCommand(preveri, con);
+            string preveri_pass = command.ExecuteScalar().ToString();
+            if (preveri_pass.Equals("True"))
+            {
+                string state = "SELECT ChangePasword('" + cp_username.Text + "','" + old_password.Password.ToString() + "','" + new_password.Password.ToString() + "')";
+                NpgsqlCommand cmd = new NpgsqlCommand(state, con);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("You have successfully changed your password");
+                ChangePasswordGrid.Visibility= Visibility.Collapsed;
+                GridLogin.Visibility= Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Wrong password entered for this user.");
+                old_password.Password = null;
+                new_password.Password = null;
+            }
+            con.Close();
+
+            
         }
     }
 }

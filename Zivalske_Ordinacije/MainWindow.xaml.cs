@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,12 @@ namespace Zivalske_Ordinacije
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string host = "ep-dawn-rain-830060.eu-central-1.aws.neon.tech";
+        public string db = "neondb";
+        public string user = "gasperflorjan5";
+        public string pass = "l7fQcR5kvPZM";
+        NpgsqlConnection con = new NpgsqlConnection("Host=ep-dawn-rain-830060.eu-central-1.aws.neon.tech;" +
+            " Port=5432; User Id=gasperflorjan5;Password=l7fQcR5kvPZM;Database=neondb");
         public MainWindow()
         {
             InitializeComponent();
