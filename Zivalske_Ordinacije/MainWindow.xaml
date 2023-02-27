@@ -56,7 +56,7 @@
             <Button x:Name="Oddelki" Content="Oddelki ordinacij" Foreground="White" FontFamily="Calibri"
                     FontSize="24" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top"
                     RenderTransformOrigin="1.086,-1.158"
-                    Height="40" Width="300">
+                    Height="40" Width="300" Click="Oddelki_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
@@ -111,10 +111,10 @@
                         <GradientStop Color="Purple" Offset="1" />
                     </LinearGradientBrush>
                 </Button.Background>
-                </Button>
-                    <Label Content="Živalske Ordinacije" HorizontalAlignment="Left" Margin="29,42,0,0" VerticalAlignment="Top" 
+            </Button>
+            <Label Content="Živalske Ordinacije" HorizontalAlignment="Left" Margin="29,42,0,0" VerticalAlignment="Top" 
                    FontSize="30" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="BlueViolet"/>
-            <ListView x:Name="listView" ItemsSource="{Binding}" Margin="29,94,391,94">
+            <ListView x:Name="listView" ItemsSource="{Binding}" Margin="29,94,391,94" SelectionChanged="listView_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding id_o}"/>
@@ -182,7 +182,7 @@
                 </Button.Background>
             </Button>
         </Grid>
-        <Grid Name="GridVet" Visibility="Visible">
+        <Grid Name="GridVet" Visibility="Hidden">
             <Button x:Name="BackVet" Content="Back" Foreground="White" FontFamily="Calibri"
                     FontSize="24" HorizontalAlignment="Left" Margin="853,37,0,0" VerticalAlignment="Top"
                     RenderTransformOrigin="1.086,-1.158"
@@ -202,7 +202,7 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <ListView x:Name="listVet" ItemsSource="{Binding}" Margin="29,94,414,94" >
+            <ListView x:Name="listVet" ItemsSource="{Binding}" Margin="29,94,414,94" SelectionChanged="listVet_SelectionChanged" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding vet_id}"/>
@@ -291,7 +291,83 @@
                 </Button.Background>
             </Button>
         </Grid>
-
-
+        <Grid Name="GridOddelek" Visibility="Visible">
+            <ComboBox x:Name="OddelekIme" HorizontalAlignment="Left" Margin="39,101,0,0" VerticalAlignment="Top" Width="236" SelectionChanged="OddelekIme_SelectionChanged"/>
+            <Label  Content="Oddelek" HorizontalAlignment="Left" Margin="39,67,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18"/>
+            <Button x:Name="BackOddelek" Content="Back" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Left" Margin="853,37,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="100" Click="BackOddelek_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <ListView x:Name="listOdd" ItemsSource="{Binding}" Margin="39,145,404,43">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding id}"/>
+                        <GridViewColumn Header="Ime" DisplayMemberBinding="{Binding ime_ord}"/>
+                        <GridViewColumn Header="Naslov" DisplayMemberBinding="{Binding naslov_ord}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button x:Name="EditOdd" Content="Edit" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Left" Margin="843,413,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="120" Click="EditOdd_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Label  Content="Ime oddelka" HorizontalAlignment="Left" Margin="607,168,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18"/>
+            <TextBox x:Name="odd_ime" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
+                     Margin="727,168,0,0" TextWrapping="Wrap"  FontSize="20"
+                     Background="Transparent" VerticalAlignment="Top" Width="236" Height="29"/>
+            <Button x:Name="DeleteOdd" Content="Delete" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Left" Margin="703,413,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="120">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </Grid>
+
+
+    </Grid>
 </Window>
