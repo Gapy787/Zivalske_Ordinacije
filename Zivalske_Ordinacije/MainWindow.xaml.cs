@@ -124,6 +124,35 @@ namespace Zivalske_Ordinacije
             string delete = "SELECT DeleteOrdinacije('" + o_id + "')";
             NpgsqlCommand cmd = new NpgsqlCommand(delete, con);
             cmd.ExecuteNonQuery();
+            using (var cmmd = new NpgsqlCommand("SELECT * FROM IzpisOrdinacije()", con))
+            {
+                var reader = cmmd.ExecuteReader();
+                DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+                GridOrdinacije.DataContext = dataTable;
+            }
+            con.Close();
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            GridOrdinacije.Visibility = Visibility.Hidden;
+            MainGrid.Visibility = Visibility.Visible;
+        }
+
+        private void Veterinarji_Click(object sender, RoutedEventArgs e)
+        {
+            MainGrid.Visibility = Visibility.Hidden;
+            GridVet.Visibility = Visibility.Visible;
+            con.Open();
+            using (var cmd = new NpgsqlCommand("SELECT * FROM IzpisVeterinarjev()", con))
+            {
+                var reader = cmd.ExecuteReader();
+                DataTable dataTable = new DataTable();
+                dataTable.Load(reader);
+                GridVet.DataContext = dataTable;
+            }
+            con.Close();
         }
     }
 }
