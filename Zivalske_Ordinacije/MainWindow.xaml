@@ -73,7 +73,7 @@
                 </Button.Background>
             </Button>
         </Grid>
-        <Grid Name="GridOrdinacije" Visibility="Visible">
+        <Grid Name="GridOrdinacije" Visibility="Hidden">
             <Button x:Name="Back" Content="Back" Foreground="White" FontFamily="Calibri"
                     FontSize="24" HorizontalAlignment="Left" Margin="853,37,0,0" VerticalAlignment="Top"
                     RenderTransformOrigin="1.086,-1.158"
@@ -94,12 +94,27 @@
                 </Button.Background>
             </Button>
             <Button x:Name="Edit" Content="Edit" Foreground="White" FontFamily="Calibri"
-                    FontSize="24" HorizontalAlignment="Left" Margin="853,37,0,0" VerticalAlignment="Top"
+                    FontSize="24" HorizontalAlignment="Left" Margin="532,413,0,0" VerticalAlignment="Top"
                     RenderTransformOrigin="1.086,-1.158"
-                    Height="40" Width="100" >
-                <Label Content="Živalske Ordinacije" HorizontalAlignment="Left" Margin="29,42,0,0" VerticalAlignment="Top" 
+                    Height="40" Width="120" Click="Edit_Click" >
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                </Button>
+                    <Label Content="Živalske Ordinacije" HorizontalAlignment="Left" Margin="29,42,0,0" VerticalAlignment="Top" 
                    FontSize="30" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="BlueViolet"/>
-            <ListView x:Name="listView" ItemsSource="{Binding}" Margin="29,94,391,94" SelectionChanged="listView_SelectionChanged">
+            <ListView x:Name="listView" ItemsSource="{Binding}" Margin="29,94,391,94">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding id_o}"/>
@@ -167,8 +182,27 @@
                 </Button.Background>
             </Button>
         </Grid>
-        <Grid Name="GridVet" Visibility="Hidden">
-            <ListView x:Name="listVet" ItemsSource="{Binding}" Margin="29,94,391,94" >
+        <Grid Name="GridVet" Visibility="Visible">
+            <Button x:Name="BackVet" Content="Back" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Left" Margin="853,37,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="100" Click="BackVet_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <ListView x:Name="listVet" ItemsSource="{Binding}" Margin="29,94,414,94" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" DisplayMemberBinding="{Binding vet_id}"/>
@@ -181,6 +215,81 @@
             </ListView>
             <Label Content="Veterinarji živalskih ordinacij" HorizontalAlignment="Left" Margin="29,42,0,0" VerticalAlignment="Top" 
                    FontSize="30" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="BlueViolet"/>
+            <Label Content="Ime" HorizontalAlignment="Left" Margin="656,150,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18" />
+            <Label  Content="Priimek" HorizontalAlignment="Left" Margin="630,198,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18"/>
+            <Label  Content="Naziv" HorizontalAlignment="Left" Margin="645,246,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18"/>
+            <Label  Content="Ordinacija" HorizontalAlignment="Left" Margin="604,294,0,0" VerticalAlignment="Top"
+                   Foreground="BlueViolet" FontWeight="Bold" FontSize="18"/>
+            <TextBox x:Name="vet_ime" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
+                     Margin="703,150,0,0" TextWrapping="Wrap"  FontSize="20"
+                     Background="Transparent" VerticalAlignment="Top" Width="236" Height="29"/>
+            <TextBox x:Name="vet_priimek" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
+                     Margin="703,198,0,0" TextWrapping="Wrap"  FontSize="20"
+                     Background="Transparent" VerticalAlignment="Top" Width="236" Height="29"/>
+            <TextBox x:Name="vet_naziv" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
+                     Margin="703,246,0,0" TextWrapping="Wrap"  FontSize="20"
+                     Background="Transparent" VerticalAlignment="Top" Width="236" Height="29"/>
+            <ComboBox x:Name="Ime" HorizontalAlignment="Left" Margin="703,302,0,0" VerticalAlignment="Top" Width="236"/>
+            <Button x:Name="AddVet" Content="Add" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Left" Margin="821,413,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="120" Click="AddVet_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="DeleteVet" Content="Delete" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Left" Margin="680,413,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="120" Click="DeleteVet_Click" >
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="EditVet" Content="Edit" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Left" Margin="532,413,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="120" Click="EditVet_Click" >
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </Grid>
 
 
