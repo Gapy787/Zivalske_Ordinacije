@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Core" Version="1.28.0" />
     <PackageReference Include="Npgsql" Version="7.0.2" />
   </ItemGroup>
 

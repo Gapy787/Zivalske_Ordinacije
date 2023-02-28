@@ -14,7 +14,7 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Grid Name="GridLogin" Visibility="Visible">
+        <Grid Name="GridLogin" Visibility="Hidden">
 
             <TextBox x:Name="l_username" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
                      Margin="280,166,0,0" TextWrapping="Wrap"  FontSize="20"
@@ -100,7 +100,7 @@
                Margin="0,395,0,0" VerticalAlignment="Top" Foreground="BlueViolet" FontSize="14" MouseDown="HaveAcc_MouseDown"/>
         </Grid>
 
-        <Grid Name="SpremeniPasswordGrid" Visibility="Hidden" RenderTransformOrigin="0.783,0.496" Height="434" VerticalAlignment="Top">
+        <Grid Name="SpremeniPasswordGrid" Visibility="Visible" RenderTransformOrigin="0.783,0.496" Height="434" VerticalAlignment="Top">
             <Label x:Name="label_title_pass" Content="Change password" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" 
                    FontSize="40" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="BlueViolet"/>
             <TextBox x:Name="cp_username" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
@@ -110,6 +110,25 @@
                    Foreground="BlueViolet" FontSize="14"/>
             <Button x:Name="User"  Content="Find User" Foreground="White" FontFamily="Calibri" FontSize="24" HorizontalAlignment="Center" Margin="0,230,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.086,-1.158" Click="User_Click"
                     Height="40" Width="130">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="MediumPurple" Offset="0.2" />
+                        <GradientStop Color="BlueViolet" Offset="0.6" />
+                        <GradientStop Color="Purple" Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+            <Button x:Name="BackGes" Content="Back" Foreground="White" FontFamily="Calibri"
+                    FontSize="24" HorizontalAlignment="Left" Margin="649,32,0,0" VerticalAlignment="Top"
+                    RenderTransformOrigin="1.086,-1.158"
+                    Height="40" Width="128" Click="BackGes_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border CornerRadius="20" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">

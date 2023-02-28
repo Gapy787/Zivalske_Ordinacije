@@ -61,20 +61,36 @@ namespace Zivalske_Ordinacije
         public void RefreshComboOddelek()
         { 
             ComboBox box = new ComboBox();
-            box.Items.Clear();  
-            using (NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM Oddelek1()", con))
-            {
-                using (NpgsqlDataReader read = command.ExecuteReader())
-                {
-                    while (read.Read())
-                    {
-                        
-                        string name = read.GetString(1);
-                        OddelekIme.Items.Add(name);
-                    }
-                }
-            }
-            
+            box.Items.Clear();
+            var cmd = new NpgsqlCommand("SELECT * FROM Oddelek1()", con);
+
+
+            var adapter = new NpgsqlDataAdapter(cmd);
+            var dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            OddelekIme.DisplayMemberPath = "name";
+            OddelekIme.SelectedValuePath = "id_od";
+            OddelekIme.ItemsSource = dataTable.DefaultView;
+
+        }
+
+        public void RefreshListOrdi()
+        {
+            ListView listView1 = new ListView();
+            listView1.Items.Clear();
+            var selectedDepartmentID = (int)OddelekIme.SelectedValue;
+
+            var cmd = new NpgsqlCommand("SELECT * FROM GetOrdinacija(@department_id)", con);
+            cmd.Parameters.AddWithValue("department_id", selectedDepartmentID);
+
+
+            var adapterOffices = new NpgsqlDataAdapter(cmd);
+            var dataTableOffices = new DataTable();
+            adapterOffices.Fill(dataTableOffices);
+            listOdd.DisplayMemberPath = "id";
+            listOdd.DisplayMemberPath = "ime_ord";
+            listOdd.DisplayMemberPath = "naslov_ord";
+            listOdd.ItemsSource = dataTableOffices.DefaultView;
         }
 
         private void Ordinacije_Click(object sender, RoutedEventArgs e)
@@ -309,27 +325,30 @@ namespace Zivalske_Ordinacije
             OddelekIme.DisplayMemberPath = "name";
             OddelekIme.SelectedValuePath = "id_od";
             OddelekIme.ItemsSource = dataTable.DefaultView;
-            /*using (NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM Oddelek1()", con))
+
+            using (NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM kraji()", con))
             {
                 using (NpgsqlDataReader read = command.ExecuteReader())
                 {
                     while (read.Read())
                     {
-                        
-                        string name = read.GetString(1);
-                        OddelekIme.Items.Add(name);
+                        string name = read.GetString(0);
+                        KrajIme.Items.Add(name);
                     }
                 }
-            }*/
+            }
+
             con.Close();
         }
+
+       
 
         private void BackOddelek_Click(object sender, RoutedEventArgs e)
         {
             GridOddelek.Visibility = Visibility.Hidden;
             MainGrid.Visibility = Visibility.Visible;
-            OddelekIme.Items.Clear();
             odd_ime.Text = "";
+            KrajIme.Items.Clear();
         }
 
         private void OddelekIme_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -367,16 +386,77 @@ namespace Zivalske_Ordinacije
 
         private void EditOdd_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                int oddelke_id = (int)OddelekIme.SelectedValue;
+                string novo_ime = odd_ime.Text.ToString();
+                
+                con.Open();
+                string state = "SELECT EditOddelek('" + novo_ime + "'," + oddelke_id + ")";
+                NpgsqlCommand cmd = new NpgsqlCommand(state, con);
+                cmd.ExecuteNonQuery();
+                RefreshListOrdi();
+                RefreshComboOddelek();
+                con.Close();
+                odd_ime.Text = "";
+            }
+            catch
+            {
+                
+            }
+        }
+
+        private void DeleteOdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int odd_id = (int)OddelekIme.SelectedValue;
+
+                con.Open();
+                string statement="SELECT DeleteOddelek("+odd_id+");";
+                NpgsqlCommand cmd = new NpgsqlCommand(statement, con);
+                cmd.ExecuteNonQuery();
+                RefreshListOrdi();
+                RefreshComboOddelek();
+                con.Close();
+                odd_ime.Text = "";
+            }
+            catch
+            {
+                
+            }
+        }
+
+        private void AddOdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (odd_ime.Text == "" || ordinacija_ime.Text == "" || ordinacija_naslov.Text == "" || KrajIme.SelectedItem == null)
+            {
+                MessageBox.Show("Can't add veterinar without all information", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                con.Open();
+
+                string insert = "SELECT AddOddelek('" + odd_ime.Text + "','" + ordinacija_ime.Text + "','" + ordinacija_naslov.Text + "','" + KrajIme.SelectedItem.ToString() + "')";
+                NpgsqlCommand cmmd = new NpgsqlCommand(insert, con);
+                cmmd.ExecuteNonQuery();
+                RefreshListOrdi();
+                RefreshComboOddelek();
+                con.Close();
+                odd_ime.Text = "";
+                ordinacija_ime.Text = "";
+                ordinacija_naslov.Text = "";
+                KrajIme.SelectedItem= null;
+                
+            }
+        }
+
+        private void BackMain_Click(object sender, RoutedEventArgs e)
+        {
+            Login newWindow = new Login();
+            newWindow.Show();
+            this.Close();
             
-            string oddelek = OddelekIme.SelectedItem.ToString();
-            con.Open();
-            string edit = "SELECT EditOddelek('" + odd_ime.Text+"','"+oddelek+"')";
-            NpgsqlCommand cmd = new NpgsqlCommand(edit, con);
-            cmd.ExecuteNonQuery();
-            OddelekIme.Items.Clear();
-            RefreshComboOddelek();
-            odd_ime.Text = "";
-            con.Close();
         }
     }
 }

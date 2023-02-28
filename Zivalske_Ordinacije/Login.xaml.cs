@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Azure;
 using Npgsql;
 
 namespace Zivalske_Ordinacije
@@ -324,6 +325,14 @@ namespace Zivalske_Ordinacije
             {
                 e.Handled = true;
             }
+        }
+
+        private void BackGes_Click(object sender, RoutedEventArgs e)
+        {
+            SpremeniPasswordGrid.Visibility = Visibility.Hidden;
+            GridLogin.Visibility = Visibility.Visible;
+            cp_username.Text = "";
+
         }
     }
 }
