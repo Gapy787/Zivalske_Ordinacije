@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zivalske_Ordinacije"
         mc:Ignorable="d"
-        Title="MainWindow" Height="525" Width="1000">
+        Title="MainWindow" Height="525" Width="1000" Loaded="Window_Loaded">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="Aqua"  Offset="0.1" />
@@ -17,7 +17,7 @@
         <Grid Name="MainGrid" Visibility="Visible">
             <Label Content="Prijavljeni ste kot:" HorizontalAlignment="Left" Margin="23,60,0,0" VerticalAlignment="Top" 
                    FontSize="25" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="BlueViolet"/>
-            <Label Content="" HorizontalAlignment="Left" Margin="218,62,0,0" VerticalAlignment="Top" 
+            <Label x:Name="LabelPrikaz" Content="" HorizontalAlignment="Left" Margin="218,62,0,0" VerticalAlignment="Top" 
                    FontSize="22" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="White"/>
             <Button x:Name="Ordinacije" Content="Zivalske Ordinacije Slovenije" Foreground="White" FontFamily="Calibri"
                     FontSize="24" HorizontalAlignment="Center" Margin="0,134,0,0" VerticalAlignment="Top"

@@ -30,6 +30,7 @@ namespace Zivalske_Ordinacije
         public string user = "gasperflorjan5";
         public string pass = "l7fQcR5kvPZM";
         NpgsqlConnection con = new NpgsqlConnection("Host=ep-dawn-rain-830060.eu-central-1.aws.neon.tech; Port=5432; User Id=gasperflorjan5;Password=l7fQcR5kvPZM;Database=neondb");
+        public static string username;
         private void Login1_Click(object sender, RoutedEventArgs e)
         {
             con.Open();
@@ -47,7 +48,7 @@ namespace Zivalske_Ordinacije
             else
             {
                 MessageBox.Show("Successful login");
-                
+                username = l_username.Text;
                 MainWindow newWindow = new MainWindow();
                 newWindow.Show();
                 this.Close();

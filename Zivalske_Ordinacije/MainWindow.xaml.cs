@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,9 @@ namespace Zivalske_Ordinacije
         public MainWindow()
         {
             InitializeComponent();
+            
         }
+      
 
         public void RefreshList()
         {
@@ -457,6 +460,11 @@ namespace Zivalske_Ordinacije
             newWindow.Show();
             this.Close();
             
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LabelPrikaz.Content = Login.username;
         }
     }
 }
