@@ -22,6 +22,8 @@ namespace Zivalske_Ordinacije
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+ 
     public partial class MainWindow : Window
     {
         public string host = "ep-dawn-rain-830060.eu-central-1.aws.neon.tech";
@@ -434,7 +436,7 @@ namespace Zivalske_Ordinacije
         {
             if (odd_ime.Text == "" || ordinacija_ime.Text == "" || ordinacija_naslov.Text == "" || KrajIme.SelectedItem == null)
             {
-                MessageBox.Show("Can't add veterinar without all information", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Can't add Oddelek and Ordinacija without all information", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {

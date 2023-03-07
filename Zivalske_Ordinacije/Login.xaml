@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zivalske_Ordinacije"
         mc:Ignorable="d"
-        Height="470" Width="800">
+        Height="470" Width="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="Aqua"  Offset="0.1" />
@@ -14,7 +16,7 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid>
-        <Grid Name="GridLogin" Visibility="Hidden">
+        <Grid Name="GridLogin" Visibility="Visible">
 
             <TextBox x:Name="l_username" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
                      Margin="280,166,0,0" TextWrapping="Wrap"  FontSize="20"
@@ -93,14 +95,12 @@
                      Background="Transparent" Width="236"  Height="29" PreviewTextInput="r_confirmpassword_PreviewTextInput" PasswordChanged="r_confirmpassword_PasswordChanged"/>
             <Label Content="Confirm password" HorizontalAlignment="Left" Margin="278,261,0,0" VerticalAlignment="Top" 
                    RenderTransformOrigin="-0.261,1.079" Foreground="BlueViolet" FontSize="14"/>
-            <CheckBox x:Name="ShowPassword" Content="Show password" Foreground="BlueViolet" FontSize="12" 
-                      HorizontalAlignment="Left" Margin="281,320,0,0" VerticalAlignment="Top" Height="16" Width="120"
-                      Checked="ShowPassword_Checked" Unchecked="ShowPassword_Unchecked"/>
+           
             <Label x:Name="HaveAcc" Content="Already have an account?" HorizontalAlignment="Center"
                Margin="0,395,0,0" VerticalAlignment="Top" Foreground="BlueViolet" FontSize="14" MouseDown="HaveAcc_MouseDown"/>
         </Grid>
 
-        <Grid Name="SpremeniPasswordGrid" Visibility="Visible" RenderTransformOrigin="0.783,0.496" Height="434" VerticalAlignment="Top">
+        <Grid Name="SpremeniPasswordGrid" Visibility="Hidden" RenderTransformOrigin="0.783,0.496" Height="434" VerticalAlignment="Top">
             <Label x:Name="label_title_pass" Content="Change password" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" 
                    FontSize="40" FontFamily="Calibri" FontWeight="ExtraBold" Foreground="BlueViolet"/>
             <TextBox x:Name="cp_username" FontWeight="Medium" FontFamily="Calibri" Foreground="White" BorderBrush="White" BorderThickness="0,0,0,2" HorizontalAlignment="Left"
